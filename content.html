@@ -1,0 +1,593 @@
+<!-- 
+Navigation_双栏布局_面板_登录模态框 在 Navigation_双栏布局_模态框_面板基础上改动
+  1. 增加“登录”模态框效果，form样式不同于之前，宽度在modal.content部分作了修改 
+-->
+
+
+<!-- 
+Navigation_双栏布局_模态框 在 Navigation_双栏布局 基础上改动
+  1. 增加“我要卖书”模态框效果
+  2. “登录”并未实现模态框效果
+ -->
+
+<!--
+ Navigation_双栏布局 在 Navigation 基础上改动
+  1.去掉div.container，增加row并2比10划分
+  2.2部分采用固定定位
+  3.10部分增加margin-left来弥补因为fixed导致的左移 
+ -->  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>二手书信息发布平台</title>
+	<link rel="stylesheet" href=".\css\bootstrap.min.css">
+	<script src=".\js\jquery-1.11.2.js"></script>
+	<script src=".\js\bootstrap.min.js"></script>
+	<script>
+	function chooseMajor(){
+		var choice=document.form1.department;
+		var chooseMajor=document.form1
+		var index=0;
+		// alert(choice.options[1].value);
+		var i;
+		for(i=1; i<choice.options.length;i++){
+			if(choice.options[i].selected){
+				// alert(choice.options[i].value);
+				// choice.options[i].className="show";
+				index=i;
+			}
+			else{
+				// choice.options[i].className="hidden"
+			}
+		}
+		if(index==0){
+			document.getElementById("major_00").disabled="true";
+			document.getElementById("major_00").className="form-control show"
+		}
+		else{
+			document.getElementById("major_00").disabled="true";
+			document.getElementById("major_00").className="form-control hidden"
+		}		
+		for(i=1; i<choice.options.length; i++){
+			var name="major_"
+			if(i<10){
+				name=name+"0"+i;
+			}
+			else{
+				name=name+i;
+			}
+			if(i==index){
+				document.getElementById(name).className="form-control show"
+				document.getElementById(name).disabled=false
+			}
+			else{
+				document.getElementById(name).className="form-control hidden"
+				document.getElementById(name).disabled=true
+			}
+		}
+
+	}
+	</script>
+	<style>
+	body{background-color:rgb(240,240,240);}
+	.row{padding:100px;}
+	.book-thumbnail{margin-bottom:20px;}
+	.btn-detail{width:49%;}
+	.caption-detail{text-align:center; font-weight:bold;}
+	a.signin{float:right;background-color:#222222;color:#9d9d9d;font-size:20px;height:50px;line-height:50px;padding-right:20px; text-align:center;text-decoration:none;}
+	a.signin:visited{color:#e0e0e0;}
+	a.signin:hover{color:#ffffff;}
+	a.signin:active{color:#ffffff;}
+	div.body_left.col-md-2{position:fixed; top:100px; left:85px;}
+
+
+	form#form1{
+		width:300px;
+		margin:0 auto;
+	}
+	h2{
+		text-align:center;
+		font-weight:bold;
+	}
+	label{margin-left:-25px;}
+	.keyword{padding:0px;}
+	.price.form-control{padding:0px; width:430px; margin-left:15px; margin-right:15px; position:relative;}
+	/*input.form-control{padding-right:30px; margin-right:30px;}*/
+	</style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="navbar-header">
+		<a href="" class="navbar-brand">二手书</a>
+	</div>
+	<div>
+		<ul class="nav navbar-nav" >
+			<li class="active"><a href="">院系</a></li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">信通院<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">电子信息工程</a></li>
+					<li><a href="#">通信工程</a></li>
+					<li><a href="#">信息工程</a></li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">电子工程学院<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">电子信息科学与技术</a></li>
+					<li><a href="#">电子科学与技术</a></li>
+					<li><a href="#">光电信息科学与工程</a></li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">计算机学院<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">计算机科学与技术</a></li>
+					<li><a href="#">网络工程</a></li>
+					<li><a href="#">信息安全</a></li>
+					<li><a href="#">智能科学与技术</a></li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">自动化学院<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">机械工程</a></li>
+					<li><a href="#">测控技术与仪器</a></li>
+					<li><a href="#">物流工程</a></li>
+					<li><a href="#">自动化</a></li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">软件学院<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">软件工程</a></li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">数媒院<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">数字媒体技术</a></li>
+					<li><a href="#">工业设计</a></li>
+					<li><a href="#">数字媒体艺术</a></li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">理学院<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">应用物理学（通信基础科学）</a></li>
+					<li><a href="#">数学与应用数学</a></li>
+					<li><a href="#">信息与计算科学</a></li>
+					<li><a href="#">应用物理学</a></li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">经济管理学院<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">工程管理</a></li>
+					<li><a href="#">工商管理</a></li>
+					<li><a href="#">信息管理与信息系统</a></li>
+					<li><a href="#">电子商务</a></li>
+					<li><a href="#">市场营销</a></li>
+					<li><a href="#">会计学</a></li>
+					<li><a href="#">经济学</a></li>
+					<li><a href="#">国际经济与贸易</a></li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">公共管理学院<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">公共事业管理</a></li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">人文学院<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">英语</a></li>
+					<li><a href="#">日语</a></li>
+					<li><a href="#">法学</a></li>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">国际学院<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">电信工程及管理</a></li>
+					<li><a href="#">电子商务及法律</a></li>
+					<li><a href="#">物联网</a></li>
+				</ul>
+			</li>
+		</ul>
+		<a href="#Login" data-toggle="modal" class="signin">登录</a>
+	</div>
+</nav>
+
+<!-- <div class="container"> -->
+	<div class="row">
+		<div class="body_left col-md-2" style="background-color:#eee" >
+			<!-- <img src="./image/001.jpg" width="100%" alt=""> -->
+			<div class="panel panel-info">
+				<!-- <div class="panel-heading">
+					<h3 class="panel-title">简介</h3>
+				</div> -->
+				<div class="panel-body">
+				<p class="text-center lead" style="font-weight:bolder ">你可以在这里发布闲置的二手书信息</p>
+				<p class="text-muted text-center lead" style="font-weight:bold">点击下面的按钮尝试一下</p>
+				<button class="btn btn-info btn-block btn-lg" data-toggle="modal" data-target="#newBook">我要卖书</button>
+			<!-- <p class="text-info">本行内容带有一个 info class</p> -->
+				</div>
+			</div>
+		</div>
+		<div class="col-md-10" style="margin-left:240px">
+			<div class="rowtest">
+			   <div class="col-sm-6 col-md-3 book-thumbnail">
+				    <div class="thumbnail">
+				    	<img src="./image/001.jpg" alt="通用的占位符缩略图">
+			    	</div>
+			    	<div class="caption">
+			    		<h3 class="caption-detail">通信原理</h3>
+			    		<p>一些关于本书新旧程度的描述</p>
+			    		<button class="btn btn-info btn-detail" onclick="javascript:window.location.href='detail.html'">详情</button>
+			    		<button class="btn btn-primary btn-detail" disabled>收藏</button>
+			    	</div>
+			   </div>
+			    <div class="col-sm-6 col-md-3 book-thumbnail">
+				    <div class="thumbnail">
+				    	<img src="./image/001.jpg" alt="通用的占位符缩略图">
+			    	</div>
+			    	<div class="caption">
+			    		<h3 class="caption-detail">通信原理</h3>
+			    		<p>一些关于本书新旧程度的描述</p>
+			    		<button class="btn btn-info btn-detail">详情</button>
+			    		<button class="btn btn-primary btn-detail">收藏</button>
+			    	</div>
+			   </div>
+			    <div class="col-sm-6 col-md-3 book-thumbnail">
+				    <div class="thumbnail">
+				    	<img src="./image/001.jpg" alt="通用的占位符缩略图">
+			    	</div>
+			    	<div class="caption">
+			    		<h3 class="caption-detail">通信原理</h3>
+			    		<p>一些关于本书新旧程度的描述</p>
+			    		<button class="btn btn-info btn-detail">详情</button>
+			    		<button class="btn btn-primary btn-detail">收藏</button>
+			    	</div>
+			   </div>
+			    <div class="col-sm-6 col-md-3 book-thumbnail">
+				    <div class="thumbnail">
+				    	<img src="./image/001.jpg" alt="通用的占位符缩略图">
+			    	</div>
+			    	<div class="caption">
+			    		<h3 class="caption-detail">通信原理</h3>
+			    		<p>一些关于本书新旧程度的描述</p>
+			    		<button class="btn btn-info btn-detail">详情</button>
+			    		<button class="btn btn-primary btn-detail">收藏</button>
+			    	</div>
+			   </div>
+			    <div class="col-sm-6 col-md-3 book-thumbnail">
+				    <div class="thumbnail">
+				    	<img src="./image/001.jpg" alt="通用的占位符缩略图">
+			    	</div>
+			    	<div class="caption">
+			    		<h3 class="caption-detail">通信原理</h3>
+			    		<p>一些关于本书新旧程度的描述</p>
+			    		<button class="btn btn-info btn-detail">详情</button>
+			    		<button class="btn btn-primary btn-detail">收藏</button>
+			    	</div>
+			   </div>
+			    <div class="col-sm-6 col-md-3 book-thumbnail">
+				    <div class="thumbnail">
+				    	<img src="./image/001.jpg" alt="通用的占位符缩略图">
+			    	</div>
+			    	<div class="caption">
+			    		<h3 class="caption-detail">通信原理</h3>
+			    		<p>一些关于本书新旧程度的描述</p>
+			    		<button class="btn btn-info btn-detail">详情</button>
+			    		<button class="btn btn-primary btn-detail">收藏</button>
+			    	</div>
+			   </div>
+			    <div class="col-sm-6 col-md-3 book-thumbnail">
+				    <div class="thumbnail">
+				    	<img src="./image/001.jpg" alt="通用的占位符缩略图">
+			    	</div>
+			    	<div class="caption">
+			    		<h3 class="caption-detail">通信原理</h3>
+			    		<p>一些关于本书新旧程度的描述</p>
+			    		<button class="btn btn-info btn-detail">详情</button>
+			    		<button class="btn btn-primary btn-detail">收藏</button>
+			    	</div>
+			   </div>
+			    <div class="col-sm-6 col-md-3 book-thumbnail">
+				    <div class="thumbnail">
+				    	<img src="./image/001.jpg" alt="通用的占位符缩略图">
+			    	</div>
+			    	<div class="caption">
+			    		<h3 class="caption-detail">通信原理</h3>
+			    		<p>一些关于本书新旧程度的描述</p>
+			    		<button class="btn btn-info btn-detail">详情</button>
+			    		<button class="btn btn-primary btn-detail">收藏</button>
+			    	</div>
+			   </div>
+			    <div class="col-sm-6 col-md-3 book-thumbnail">
+				    <div class="thumbnail">
+				    	<img src="./image/001.jpg" alt="通用的占位符缩略图">
+			    	</div>
+			    	<div class="caption">
+			    		<h3 class="caption-detail">通信原理</h3>
+			    		<p>一些关于本书新旧程度的描述</p>
+			    		<button class="btn btn-info btn-detail">详情</button>
+			    		<button class="btn btn-primary btn-detail">收藏</button>
+			    	</div>
+			   </div>
+			    <div class="col-sm-6 col-md-3 book-thumbnail">
+				    <div class="thumbnail">
+				    	<img src="./image/001.jpg" alt="通用的占位符缩略图">
+			    	</div>
+			    	<div class="caption">
+			    		<h3 class="caption-detail">通信原理</h3>
+			    		<p>一些关于本书新旧程度的描述</p>
+			    		<button class="btn btn-info btn-detail">详情</button>
+			    		<button class="btn btn-primary btn-detail">收藏</button>
+			    	</div>
+			   </div>
+			    <div class="col-sm-6 col-md-3 book-thumbnail">
+				    <div class="thumbnail">
+				    	<img src="./image/001.jpg" alt="通用的占位符缩略图">
+			    	</div>
+			    	<div class="caption">
+			    		<h3 class="caption-detail">通信原理</h3>
+			    		<p>一些关于本书新旧程度的描述</p>
+			    		<button class="btn btn-info btn-detail">详情</button>
+			    		<button class="btn btn-primary btn-detail">收藏</button>
+			    	</div>
+			   </div>
+			    <div class="col-sm-6 col-md-3 book-thumbnail">
+				    <div class="thumbnail">
+				    	<img src="./image/001.jpg" alt="通用的占位符缩略图">
+			    	</div>
+			    	<div class="caption">
+			    		<h3 class="caption-detail">通信原理</h3>
+			    		<p>一些关于本书新旧程度的描述</p>
+			    		<button class="btn btn-info btn-detail">详情</button>
+			    		<button class="btn btn-primary btn-detail">收藏</button>
+			    	</div>
+			   </div>
+			</div>
+		</div>
+	</div>
+<!-- 以下div是单击“我要卖书”产生的模态框实现 -->
+<div class="modal fade" id="newBook" tabindex="-1" role="dialog" 
+aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+     <div class="modal-header">
+        <button type="button" class="close" 
+           data-dismiss="modal" aria-hidden="true">
+              &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+           我要卖书
+        </h4>
+     </div>
+     <div class="modal-body">
+      <!--   在这里添加一些文本 -->
+      <form action="" class="form-horizontal" name="form1">
+			<h2>图书信息</h2>
+			<div class="form-group">
+				<label for="name" class="control-label col-sm-2 text-center">书名</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="恰当的书名更容易被检索到"  required autofocus>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="abstract" class="control-label col-sm-2">简介</label>
+				<div class="col-sm-10">
+					<textarea name="abstract" id="abstract" cols="30" rows="4" class="form-control" placeholder="简要介绍一下该书的新旧程度吧"required></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="price" class="control-label col-sm-2">价格</label>
+				<div class="input-group col-sm-10" >
+					<!-- <div class="col-sm-12"> -->
+						<input type="text" class="form-control price">
+					<!-- 	before: 9 24 9 13
+						after:  9 24 9 23 -->
+						<label class="input-group-addon" style="padding: 9px 24px 9px 13px; position:absolute; left:470px; ">元</label>
+						<!-- <label for="yuan"><span class="input-group-addon">元</span></label> -->
+					<!-- </div> -->
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="contact" class="control-label col-sm-2">姓名</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="tel" class="control-label col-sm-2">电话</label>
+				<div class="col-sm-10">
+					<input type="tel" class="form-control" placeholder="留下电话方便买家联系你">
+				</div>
+			</div>
+			<!-- 院系选择，多选在select增加multiple,去掉后是单选 -->
+			<div class="form-group">
+				<label for="department" class="control-label col-sm-2">院系</label>
+				<div class="col-sm-10 ">
+					<select name="department" id="department" class="form-control " onchange="chooseMajor()" >
+						<option value="selected">选择院系</option>
+						<option value="信通院">信通院</option>
+						<option value="电子工程学院">电子工程学院</option>
+						<option value="计算机学院">计算机学院</option>
+						<option value="自动化学院">自动化学院
+						</option>
+						<option value="软件学院">软件学院</option>
+						<option value="数媒院">数媒院</option>
+						<option value="理学院">理学院</option>
+						<option value="经济管理学院">经济管理学院</option>
+						<option value="公共管理学院">公共管理学院</option>
+						<option value="人文学院">人文学院</option>
+						<option value="国际学院">国际学院</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="major" class="control-label col-sm-2">专业</label>
+				<div class="col-sm-10">
+					<select name="major_00" id="major_00" class="form-control" disabled>
+						<option value="selected">选择专业</option>
+					</select>
+					<!-- <select name="major_pre" id="major_pre"></select> -->
+					<select name="major_01" id="major_01" class="form-control hidden">
+						<option value="selected">选择专业</option>
+						<option value="电子信息工程">电子信息工程</option>
+						<option value="通信工程">通信工程</option>
+						<option value="信息工程">信息工程</option>
+					</select>
+					<select name="major_02" id="major_02" class="form-control hidden">
+						<option value="selected">选择专业</option>
+						<option value="电子信息科学与技术">电子信息科学与技术</option>
+						<option value="电子科学与技术">电子科学与技术</option>
+						<option value="光电信息科学与工程">光电信息科学与工程</option>
+					</select>
+					<select name="major_03" id="major_03" class="form-control hidden">
+						<option value="selected">选择专业</option>
+						<option value="计算机科学与技术">计算机科学与技术</option>
+						<option value="网络工程">网络工程</option>
+						<option value="信息安全">信息安全</option>
+						<option value="智能科学与技术">智能科学与技术</option>
+					</select>
+					<select name="major_04" id="major_04" class="form-control hidden">
+						<option value="selected">选择专业</option>
+						<option value="机械工程">机械工程</option>
+						<option value="测控技术与仪器">测控技术与仪器</option>
+						<option value="物流工程">物流工程</option>
+						<option value="自动化">自动化</option>
+					</select>	
+					<select name="major_05" id="major_05" class="form-control hidden">
+						<option value="selected">选择专业</option>
+						<option value="软件工程">软件工程</option>
+					</select>
+					<select name="major_06" id="major_06" class="form-control hidden">
+						<option value="selected">选择专业</option>
+						<option value="数字媒体技术">数字媒体技术</option>
+						<option value="工业设计">工业设计</option>
+						<option value="数字媒体艺术">数字媒体艺术</option>
+					</select>
+					<select name="major_07" id="major_07" class="form-control hidden">
+						<option value="selected">选择专业</option>
+						<option value="应用物理学（通信基础科学）">应用物理学（通信基础科学）</option>
+						<option value="数学与应用数学">数学与应用数学</option>
+						<option value="信息与计算科学">信息与计算科学</option>
+						<option value="应用物理学">应用物理学</option>
+					</select>
+					<select name="major_08" id="major_08" class="form-control hidden">
+						<option value="selected">选择专业</option>
+						<option value="工程管理">工程管理</option>
+						<option value="工商管理">工商管理</option>
+						<option value="信息管理与信息系统">智能科学与技术</option>
+						<option value="电子商务">电子商务</option>
+						<option value="市场营销">市场营销</option>
+						<option value="会计学">会计学</option>
+						<option value="统计学">统计学</option>
+						<option value="经济学">经济学</option>
+						<option value="国际经济与贸易">国际经济与贸易</option>
+					</select>
+					<select name="major_09" id="major_09" class="form-control hidden">
+						<option value="selected">选择专业</option>
+						<option value="公共管理事业">公共管理事业</option>
+					</select>
+					<select name="major_10" id="major_10" class="form-control hidden">
+						<option value="selected">选择专业</option>
+						<option value="英语">英语</option>
+						<option value="日语">日语</option>
+						<option value="法学">法学</option>
+					</select>
+					<select name="major_11" id="major_11" class="form-control hidden">
+						<option value="selected">选择专业</option>
+						<option value="电信工程及管理">电信工程及管理</option>
+						<option value="电子商务及法律">电子商务及法律</option>
+						<option value="物联网">物联网</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="keyword" class="keyword control-label col-sm-2">关键字</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" placeholder="适当的关键字可让图书更容易被检索">
+				</div>
+			</div>
+			<input type="submit" value="提交" class="btn btn-success btn-block" >
+		</form>
+     </div>
+     <div class="modal-footer">
+        <button type="button" class="btn btn-default" 
+           data-dismiss="modal">关闭
+        </button>
+        <button type="button" class="btn btn-muted" disabled>
+           提交信息
+        </button>
+     </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+<!-- </div> -->
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="Login" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true" >
+   <div class="modal-dialog">
+      <div class="modal-content" style="width:480px; margin:0 auto">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               登录
+            </h4>
+         </div>
+         <div class="modal-body">
+           <!--  在这里添加一些文本 -->
+			<form action="" class="signin" method="post">
+				<!-- <h2>登录</h2> -->
+				<div class="form-group">
+					<label for="user_account" class="control-label col-sm-2 text-right" style="height:34px; line-height:34px; padding-right:0px">账号</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" placeholder="Email Address" style="margin-bottom:10px" required autofocus>
+					</div>
+				</div>
+				<!-- <input type="text" name="user_account" class="form-control"  placeholder="Email Address" required autofocus> -->
+				<div class="form-group">
+					<label for="user_password" class="control-label col-sm-2 text-right" style="height:34px; line-height:34px; padding-right:0px">密码</label>
+					<div class="col-sm-10">
+						<input type="password" class="form-control" placeholder="Password" style="margin-bottom:10px" required>
+					</div>
+				</div>
+				<br>
+				<!-- <input type="password" name="user_password" class="form-control" placeholder="Password" required> -->
+				<button class="btn btn-success submit" style="width:160px;margin-left:65px">登录</button>
+				<button class="btn btn-default" style="width:160px; margin-left:17px">忘记密码？</button>
+			</form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">关闭
+            </button>
+            <button type="button" class="btn btn-muted" disabled>
+               提交更改
+            </button>
+         </div>
+      </div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</body>
+</html>
